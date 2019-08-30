@@ -6,7 +6,9 @@ from encoder.inference import plot_embedding_as_heatmap
 from toolbox.utterance import Utterance
 from pathlib import Path
 from typing import List, Set
+from scipy.io import wavfile
 import sounddevice as sd
+import wave
 import matplotlib.pyplot as plt
 import numpy as np
 # from sklearn.manifold import TSNE         # You can try with TSNE if you like, I prefer UMAP 
@@ -138,9 +140,11 @@ class UI(QDialog):
         self.umap_ax.figure.canvas.draw()
         
     def play(self, wav, sample_rate):
-        sd.stop()
-        sd.play(wav, sample_rate)
-        
+        #wsd.PlaySound(wav, wsd.SND_MEMORY)
+        #sd.stop()
+        #sd.play(wav, sample_rate, device=1)
+        wavfile.write('Output.wav', sample_rate, wav)
+
     def stop(self):
         sd.stop()
 
